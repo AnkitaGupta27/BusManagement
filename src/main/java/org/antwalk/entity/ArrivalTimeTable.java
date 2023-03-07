@@ -12,7 +12,7 @@ import javax.persistence.Table;
 public class ArrivalTimeTable {
 	
 	@EmbeddedId
-	private RouteAndStop rs;
+	private RouteStop routeStop;
 	
 	@Column(name="morning_arrival_time")
 	private LocalTime morningArrivalTime;
@@ -20,12 +20,13 @@ public class ArrivalTimeTable {
 	@Column(name="evening_arrival_time")
 	private LocalTime eveningArrivalTime;
 
-	public RouteAndStop getRs() {
-		return rs;
+	public RouteStop getRs() {
+		return routeStop;
 	}
 
-	public void setRs(RouteAndStop rs) {
-		this.rs = rs;
+	public void setRs(RouteStop routeStop) {
+		this.routeStop = routeStop;
+		
 	}
 
 	public LocalTime getMorningArrivalTime() {
@@ -44,9 +45,9 @@ public class ArrivalTimeTable {
 		this.eveningArrivalTime = eveningArrivalTime;
 	}
 
-	public ArrivalTimeTable(RouteAndStop rs, LocalTime morningArrivalTime, LocalTime eveningArrivalTime) {
+	public ArrivalTimeTable(RouteStop routeStop, LocalTime morningArrivalTime, LocalTime eveningArrivalTime) {
 		super();
-		this.rs = rs;
+		this.routeStop = routeStop;
 		this.morningArrivalTime = morningArrivalTime;
 		this.eveningArrivalTime = eveningArrivalTime;
 	}

@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 // NOT AN ENTITY
 
 @Embeddable
-public class RouteAndStop implements Serializable {
+public class RouteStop implements Serializable {
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "route_id", referencedColumnName = "rid")
@@ -43,14 +43,14 @@ public class RouteAndStop implements Serializable {
 	}
 
 
-	public RouteAndStop(Route r, Stop s) {
+	public RouteStop(Route r, Stop s) {
 		super();
 		this.r = r;
 		this.s = s;
 	}
 
 
-	public RouteAndStop() {
+	public RouteStop() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -70,7 +70,7 @@ public class RouteAndStop implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		RouteAndStop other = (RouteAndStop) obj;
+		RouteStop other = (RouteStop) obj;
 		return Objects.equals(r, other.r) && Objects.equals(s, other.s);
 	}
 

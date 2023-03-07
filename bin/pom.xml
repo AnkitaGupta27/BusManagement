@@ -72,6 +72,15 @@
     		<artifactId>tomcat-jasper</artifactId>
    		 	<version>9.0.62</version>
 		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/javax.servlet.jsp.jstl/jstl -->
+		<!-- https://mvnrepository.com/artifact/javax.servlet.jsp.jstl/jstl-api -->
+
+<dependency>
+    <groupId>javax.servlet</groupId>
+    <artifactId>jstl</artifactId>
+    <version>1.2</version>
+</dependency>
 	</dependencies>
 
 	<build>

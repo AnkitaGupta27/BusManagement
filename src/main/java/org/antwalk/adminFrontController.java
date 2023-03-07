@@ -3,18 +3,35 @@ package org.antwalk;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.antwalk.entity.ArrivalTimeTable;
+import org.antwalk.entity.Route;
+import org.antwalk.repository.ArrivalTimeRepo;
+import org.antwalk.repository.RouteRepo;
+import org.antwalk.repository.StopRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class adminFrontController {
+	
+	@Autowired
+	ArrivalTimeRepo arrivalTimeRepo;
+
+	@Autowired
+	RouteRepo routeRepo;
+
+	@Autowired
+	StopRepo stopRepo;
+
 	
 	@RequestMapping("/admin/addAdmin")
 	public String addAmin() {
@@ -23,7 +40,7 @@ public class adminFrontController {
 	
 	@RequestMapping("/admin/listAll")
 	public ModelAndView lisAll() {
-		String uri = "http://localhost:8080/admin/getall";
+		String uri = "http://localhost:8082/admin/getall";
 		RestTemplate restTemplate = new RestTemplate();
 	    List<LinkedHashMap<String,String>> result = restTemplate.getForObject(uri, List.class);
 //	    System.out.println(result.get(0));
@@ -41,7 +58,7 @@ public class adminFrontController {
 	
 	@RequestMapping("/admin/addRoute")
 	public ModelAndView addRoutePage(HttpServletRequest request) {
-		String uri = "http://localhost:8080/stop/getall"; 
+		String uri = "http://localhost:8082/stop/getall"; 
 		RestTemplate restTemplate = new RestTemplate();
 	    List<LinkedHashMap<String,String>> result = restTemplate.getForObject(uri, List.class);
 	    System.out.println(result);
@@ -82,7 +99,7 @@ public class adminFrontController {
 //	}
 	@RequestMapping("/admin/editRoute")
 	public ModelAndView editRoute(HttpServletRequest request) {
-		String uri = "http://localhost:8080/route/getall"; 
+		String uri = "http://localhost:8082/route/getall"; 
 		RestTemplate restTemplate = new RestTemplate();
 	    List<LinkedHashMap<String,String>> result = restTemplate.getForObject(uri, List.class);
 		ModelAndView mv = new ModelAndView("editRoute");
@@ -90,10 +107,31 @@ public class adminFrontController {
 		return mv;
 	
 	}
-	@RequestMapping("/admin/updateroute")
-	public String updateroute() {
-		return "updateroute";
-	}
+	
+	 @RequestMapping("/admin/updateroute") public String updateroute() { return
+	  "updateroute"; }
+	 
+	
+	/*
+	 * @GetMapping("/admin/updateroute")
+	 * 
+	 * 
+	 * public List<ArrivalTimeTable> getAllStopsWithTimeByRouteId(@RequestParam long
+	 * routeId, @RequestParam String shift) { try { Route route =
+	 * routeRepo.findById(routeId).get();
+	 * 
+	 * if (shift.equalsIgnoreCase("morning")) { return
+	 * arrivalTimeRepo.findAllByRouteStop_RouteOrderByMorningArrivalTime(route); }
+	 * 
+	 * else { return
+	 * arrivalTimeRepo.findAllByRouteStop_RouteOrderByEveningArrivalTime(route); } }
+	 * catch (Exception e) { System.out.println(e.getMessage()); return new
+	 * ArrayList(); }
+	 * 
+	 * }
+	 */
+	 
+
 }
 	
 //	@RequestMapping("/admin/deleteAdmin")
