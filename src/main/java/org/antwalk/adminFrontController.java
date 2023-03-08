@@ -14,6 +14,7 @@ import org.antwalk.repository.StopRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -108,30 +109,38 @@ public class adminFrontController {
 	
 	}
 	
-	 @RequestMapping("/admin/updateroute") public String updateroute() { return
-	  "updateroute"; }
 	 
 	
-	/*
-	 * @GetMapping("/admin/updateroute")
-	 * 
-	 * 
-	 * public List<ArrivalTimeTable> getAllStopsWithTimeByRouteId(@RequestParam long
-	 * routeId, @RequestParam String shift) { try { Route route =
-	 * routeRepo.findById(routeId).get();
-	 * 
-	 * if (shift.equalsIgnoreCase("morning")) { return
-	 * arrivalTimeRepo.findAllByRouteStop_RouteOrderByMorningArrivalTime(route); }
-	 * 
-	 * else { return
-	 * arrivalTimeRepo.findAllByRouteStop_RouteOrderByEveningArrivalTime(route); } }
-	 * catch (Exception e) { System.out.println(e.getMessage()); return new
-	 * ArrayList(); }
-	 * 
-	 * }
-	 */
-	 
+	 @GetMapping("/admin/updateroute")
+	 @ResponseBody
 
+		public List<ArrivalTimeTable> getAllStopsWithTimeByRouteId(@RequestParam("rid") Long routeId,@RequestParam("shift") String shift) {
+			try {
+				Route route = routeRepo.findById(routeId).get();
+				if (shift.equalsIgnoreCase("morning")) {
+					return arrivalTimeRepo.findAllByRouteStop_RouteOrderByMorningArrivalTime(route);
+				}
+
+				else {
+					return arrivalTimeRepo.findAllByRouteStop_RouteOrderByEveningArrivalTime(route);
+				}
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+				return new ArrayList();
+			}
+
+		}
+		 @GetMapping("/admin/updateRoute") 
+		 public ModelAndView updateroute(HttpServletRequest request) 
+		 { 
+			 String uri = "http://localhost:8082/stop/getall"; 
+				RestTemplate restTemplate = new RestTemplate();
+			    List<LinkedHashMap<String,String>> result = restTemplate.getForObject(uri, List.class);
+				ModelAndView mv = new ModelAndView("updateroute");
+				mv.addObject("list",result);
+				return mv; 
+		 }
+		 
 }
 	
 //	@RequestMapping("/admin/deleteAdmin")

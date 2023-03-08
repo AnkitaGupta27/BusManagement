@@ -76,25 +76,23 @@ public class ArrivalTimeController {
 		return "Id does not exist";
 		
 	}
-	@GetMapping("/admin/updateroute")
-
-	public List<ArrivalTimeTable> getAllStopsWithTimeByRouteId(@RequestParam long routeId, @RequestParam String shift) {
-		try {
-			Route route = routeRepo.findById(routeId).get();
-			
-			if (shift.equalsIgnoreCase("morning")) {
-				return arrivalTimeRepo.findAllByRouteStop_RouteOrderByMorningArrivalTime(route);
-			}
-
-			else {
-				return arrivalTimeRepo.findAllByRouteStop_RouteOrderByEveningArrivalTime(route);
-			}
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			return new ArrayList();
-		}
-
-	}
+	/*
+	 * @GetMapping("/admin/updateroute")
+	 * 
+	 * public List<ArrivalTimeTable> getAllStopsWithTimeByRouteId(@RequestParam long
+	 * routeId, @RequestParam String shift) { try { Route route =
+	 * routeRepo.findById(routeId).get();
+	 * 
+	 * if (shift.equalsIgnoreCase("morning")) { return
+	 * arrivalTimeRepo.findAllByRouteStop_RouteOrderByMorningArrivalTime(route); }
+	 * 
+	 * else { return
+	 * arrivalTimeRepo.findAllByRouteStop_RouteOrderByEveningArrivalTime(route); } }
+	 * catch (Exception e) { System.out.println(e.getMessage()); return new
+	 * ArrayList(); }
+	 * 
+	 * }
+	 */
 
 	
 }

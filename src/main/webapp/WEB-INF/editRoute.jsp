@@ -12,7 +12,6 @@
 	<c:if test="${not empty errorMessage}">
 		<p style="color: red">${errorMessage}</p>
 	</c:if>
-	<form action="/admin/updateroute" method="POST">
 		<table align="CENTER" border="2" width="90%" text-align="center"
 			border-spacing="30px">
 			<tr>
@@ -26,13 +25,14 @@
 					<td><c:out value="${route.rid}" />
 					<td><c:out value="${route.start.name}" /></td>
 					<td><c:out value="${route.end.name}" /></td>
-					<td><form action="/admin/updateroute">
+					<td><form action="/admin/updateRoute" method="GET">
 							<input type="submit" value="Update route" /></td>
-
+				</form>
 				</tr>
 			</c:forEach> 
 		
-	</table></form><br><br>
+	</table>
+	<br><br>
 	<form action="/admin/manageRoute" style="text-align:center">
 		<input type="submit" value="GoBack" />
 </body>

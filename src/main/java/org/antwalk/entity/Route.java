@@ -74,5 +74,10 @@ public class Route {
 		// TODO Auto-generated constructor stub
 	}
 
+	@Override
+	public String toString() {
+		return "Route [rid=" + rid + ", start=" + start + ", end=" + end + ", active=" + active + "]";
+	}
+
 	
 }

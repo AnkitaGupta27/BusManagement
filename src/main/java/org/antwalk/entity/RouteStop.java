@@ -15,52 +15,46 @@ public class RouteStop implements Serializable {
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "route_id", referencedColumnName = "rid")
-	private Route r;
+	private Route route;
 	
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "stop_id", referencedColumnName = "sid")
-	private Stop s;
-
-
-	public Route getR() {
-		return r;
-	}
-
-
-	public void setR(Route r) {
-		this.r = r;
-	}
-
-
-	public Stop getS() {
-		return s;
-	}
-
-
-	public void setS(Stop s) {
-		this.s = s;
-	}
-
-
-	public RouteStop(Route r, Stop s) {
-		super();
-		this.r = r;
-		this.s = s;
-	}
+	private Stop stop;
 
 
 	public RouteStop() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
 
+	public RouteStop(Route route, Stop stop) {
+		this.route = route;
+		this.stop = stop;
+	}
+
+	public Route getRoute() {
+		return route;
+	}
+
+	public void setRoute(Route route) {
+		this.route = route;
+	}
+
+	public Stop getStop() {
+		return stop;
+	}
+
+	public void setStop(Stop stop) {
+		this.stop = stop;
+	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(r, s);
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((route == null) ? 0 : route.hashCode());
+		result = prime * result + ((stop == null) ? 0 : stop.hashCode());
+		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -71,8 +65,25 @@ public class RouteStop implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		RouteStop other = (RouteStop) obj;
-		return Objects.equals(r, other.r) && Objects.equals(s, other.s);
+		if (route == null) {
+			if (other.route != null)
+				return false;
+		} else if (!route.equals(other.route))
+			return false;
+		if (stop == null) {
+			if (other.stop != null)
+				return false;
+		} else if (!stop.equals(other.stop))
+			return false;
+		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "RouteStop [route=" + route + ", stop=" + stop + "]";
+	}
+
+
 
 	
 	
